@@ -3,7 +3,6 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Lottie, { LottieRefCurrentProps } from "lottie-react";
-import jarAnimation from "@/public/jar-shake.json";
 import { FortuneCard } from "./FortuneCard";
 import { ShareButton } from "./ShareButton";
 
@@ -29,6 +28,7 @@ export function FortuneTeller() {
   const [appState, setAppState] = useState<AppState>("intro");
   const [fortuneData, setFortuneData] = useState<FortuneData | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [jarAnimation, setJarAnimation] = useState<any>(null);
   const cardRef = useRef<HTMLDivElement>(null);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const lottieRef = useRef<LottieRefCurrentProps>(null);
@@ -37,6 +37,12 @@ export function FortuneTeller() {
     // Initialize audio
     audioRef.current = new Audio("/tienglac.mp3");
     audioRef.current.loop = true;
+
+    // Load jar animation
+    fetch("/jar-shake.json")
+      .then((res) => res.json())
+      .then((data) => setJarAnimation(data))
+      .catch((err) => console.error("Failed to load jar animation:", err));
 
     return () => {
       if (audioRef.current) {
