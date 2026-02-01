@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Lottie, { LottieRefCurrentProps } from "lottie-react";
+import jarAnimation from "@/public/jar-shake.json";
 import { FortuneCard } from "./FortuneCard";
 import { ShareButton } from "./ShareButton";
 
@@ -346,7 +347,7 @@ export function FortuneTeller() {
               {/* Jar Animation */}
               <div className="absolute w-full h-full">
                 <Lottie
-                  path="/jar-shake.json"
+                  animationData={jarAnimation}
                   loop={true}
                   autoplay={true}
                   style={{ width: '100%', height: '100%' }}
