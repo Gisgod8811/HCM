@@ -143,7 +143,7 @@ async function callImageModel(prompt: string): Promise<string | null> {
       if (parts) {
         // Scan for inlineData part
         const imagePart = parts.find((p: any) => p.inlineData);
-        if (imagePart) {
+        if (imagePart && imagePart.inlineData) {
           return `data:${imagePart.inlineData.mimeType};base64,${imagePart.inlineData.data}`;
         }
       }
