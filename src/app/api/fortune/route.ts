@@ -4,17 +4,9 @@ import { NextRequest, NextResponse } from "next/server";
 
 const apiKey = process.env.NEXT_PUBLIC_GEMINI_API_KEY;
 
-if (!apiKey) {
-  throw new Error(
-    "NEXT_PUBLIC_GEMINI_API_KEY environment variable is not set"
-  );
-}
-
-// Old SDK for text (proven to work)
-const genAI = new GoogleGenerativeAI(apiKey);
-
-// New SDK for image (per user request)
-const genAI_new = new GoogleGenAI({ apiKey });
+// Initialize clients only if API key is available
+const genAI = apiKey ? new GoogleGenerativeAI(apiKey) : null;
+const genAI_new = apiKey ? new GoogleGenAI({ apiKey }) : null;
 
 const systemPrompt = `Bạn là một AI chuyên gia về Văn hóa dân gian Việt Nam và Tư tưởng Hồ Chí Minh. 
 Nhiệm vụ của bạn là nhận vấn đề từ người dùng và trả về một đối tượng JSON để hệ thống xử lý (vừa hiển thị text, vừa tạo ảnh qua model Nano Banana).
@@ -53,6 +45,13 @@ LUÔN LUÔN TRẢ VỀ ĐỊNH DẠNG JSON ĐƯỢC CHỈ ĐỊNH. KHÔNG LÀM G
 
 export async function POST(request: NextRequest) {
   try {
+    if (!apiKey || !genAI || !genAI_new) {
+      return NextResponse.json(
+        { error: "API key not configured" },
+        { status: 500 }
+      );
+    }
+
     const { message } = await request.json();
 
     if (!message) {
@@ -132,7 +131,7 @@ async function callImageModel(prompt: string): Promise<string | null> {
       }
     ];
 
-    const response = await genAI_new.models.generateContentStream({
+    const response = await (genAI_new!).models.generateContentStream({
       model,
       config,
       contents,
