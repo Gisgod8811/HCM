@@ -1,0 +1,11 @@
+<!-- Placeholder SVG for Fortune Image -->
+<svg width="400" height="300" viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="400" height="300" fill="#FEF3C7"/>
+  <circle cx="200" cy="150" r="80" fill="#EF4444" opacity="0.2"/>
+  <text x="200" y="155" font-size="48" font-family="Arial" text-anchor="middle" fill="#DC2626">
+    🎊
+  </text>
+  <text x="200" y="240" font-size="16" font-family="Arial" text-anchor="middle" fill="#666">
+    Hình ảnh sẽ được tạo từ Nano Banana
+  </text>
+</svg>

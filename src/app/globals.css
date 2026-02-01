@@ -1,26 +1,98 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #F5F1E8;
+  --foreground: #2C2C2C;
+  --crimson: #8B1538;
+  --deep-red: #6B1133;
+  --muted-gold: #C9A961;
+  --creamy: #F5F1E8;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-crimson: var(--crimson);
+  --color-deep-red: var(--deep-red);
+  --color-muted-gold: var(--muted-gold);
+  --color-creamy: var(--creamy);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-playfair: var(--font-playfair);
+  --font-vietnam: var(--font-be-vietnam);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #1a1a1a;
+    --foreground: #f5f1e8;
   }
 }
 
 body {
-  background: var(--background);
+  background: linear-gradient(135deg, var(--creamy) 0%, #FFF9F0 100%);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-be-vietnam), Arial, sans-serif;
+  min-height: 100vh;
 }
+
+/* Glassmorphism effect */
+.glass-effect {
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+/* Vintage scroll effect */
+.vintage-scroll {
+  background: linear-gradient(135deg, #F5F1E8 0%, #F9F5EB 100%);
+  box-shadow: 
+    inset 0 0 20px rgba(0, 0, 0, 0.1),
+    0 10px 30px rgba(0, 0, 0, 0.2);
+  border: 2px solid #C9A961;
+  border-radius: 2px;
+}
+
+/* Decorative pattern divider */
+.pattern-divider {
+  background-image: 
+    repeating-linear-gradient(90deg, transparent, transparent 10px, #C9A961 10px, #C9A961 12px),
+    repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(201, 169, 97, 0.3) 2px, rgba(201, 169, 97, 0.3) 4px);
+  height: 20px;
+  opacity: 0.6;
+}
+
+/* Lotus icon background */
+.lotus-bg {
+  position: relative;
+}
+
+.lotus-bg::before {
+  content: "🪷";
+  position: absolute;
+  font-size: 200px;
+  opacity: 0.08;
+  z-index: 0;
+  top: -50px;
+  right: -50px;
+}
+
+/* Particle animation */
+@keyframes float-particle {
+  0% {
+    opacity: 1;
+    transform: translateY(0) translateX(0) rotate(0deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-150px) translateX(30px) rotate(360deg);
+  }
+}
+
+.particle {
+  animation: float-particle 2s ease-out forwards;
+  position: fixed;
+  pointer-events: none;
+}
+
